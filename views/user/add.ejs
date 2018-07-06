@@ -50,9 +50,26 @@
 
     <!-- Main component for a primary marketing message or call to action -->
     <div class="panel panel-default">
-      <div class="panel-heading">Panel heading without title</div>
       <div class="panel-body">
-        Panel content
+        <div class="alert alert-success" role="alert"><%= status %></div>
+        <form action="/users/addAction" method="POST">
+          <div class="form-group">
+            <label for="username">用户名</label>
+            <input type="text" name="username" class="form-control" id="username" placeholder="用户名">
+          </div>
+          <div class="form-group">
+            <label for="userGender">性别</label>
+            <select class="form-control" name="userGender">
+              <option value="0">女</option>
+              <option value="1">男</option>
+            </select>
+          </div>
+          <div class="form-group">
+              <label for="userAge">年龄</label>
+              <input type="number" name="userAge" class="form-control" id="userAge" placeholder="年龄">
+            </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
       </div>
     </div>
 
