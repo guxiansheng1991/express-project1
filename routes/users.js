@@ -45,4 +45,18 @@ router.post('/delete', function(req, res) {
   });
 });
 
+router.get('/login', function(req, res) {
+  let content = {
+    title: '登录'
+  };
+  res.render('user/login', content);
+});
+router.post('/loginAction', function(req, res) {
+  let username = req.username;
+  userModel.find({username: username}, function(err, data) {
+    if(err) res.render('error', util.handleError(err));
+    res.redirect('/users/list');
+  });
+});
+
 module.exports = router;
