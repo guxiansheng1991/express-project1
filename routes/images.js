@@ -40,10 +40,19 @@ router.get('/getImgs', function(req, res) {
 });
 router.post('/getImgsAction', function(req, res) {
   let url = req.body.url;
-  // getImgsAction.getHtml(url,function(html) {
-  //   getImgsAction.getImgs(html);
-  // });
-  res.send('成功');
+  getImgsAction.getHtml(url,function($) {
+    let content = {
+      title: '图片列表',
+      imgs: []
+    };
+    let imgs = $('img');
+    for(let i=0;i<imgs.length;i++) {
+      content.imgs.push({url: imgs[i].attribs.src, name: imgs[i].attribs.src});
+    }
+    console.log(content);
+    res.render('image/images', content);
+  });
+  // res.send('成功');
 });
 
 module.exports = router;

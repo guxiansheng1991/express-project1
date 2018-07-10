@@ -1,10 +1,13 @@
+let http = require('http');
 let https = require('https');
 let cheerio = require('cheerio');
 
 
 let imgsAction = {
   getHtml(url, cb) {
-    https.get(url, function(res) {
+    let myProto = this._checkHttp(url);
+    console.log(myProto);
+    myProto.get(url, function(res) {
       let html = '';
       let titles = [];
       res.setEncoding('utf-8');
@@ -14,7 +17,6 @@ let imgsAction = {
       });
       
       res.on('end', function() {
-        console.log(html);
         cb(cheerio.load(html));
       });
     });
@@ -23,7 +25,7 @@ let imgsAction = {
   getImgs(html) {
     let $ = html;
     let imgTags = $('img');
-    console.log(imgTags);
+    return imgTags;
   },
 
   _checkHttp(url) {
